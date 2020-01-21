@@ -101,7 +101,12 @@ public class MainActivity extends AppCompatActivity {
 
 
                         //final EditText massInput = (EditText) promptsView.findViewById(R.id.input_mass);
-                        final EditText userInput = (EditText) promptsView.findViewById(R.id.input_text);
+                        final EditText usereat = (EditText) promptsView.findViewById(R.id.input_text);
+                        final EditText usermass = (EditText) promptsView.findViewById(R.id.input_mass);
+                        final EditText userbelk = (EditText) promptsView.findViewById(R.id.input_belk);
+                        final EditText userzhir = (EditText) promptsView.findViewById(R.id.input_zhir);
+                        final EditText userugl = (EditText) promptsView.findViewById(R.id.input_ugl);
+
 
                         //Настраиваем сообщение в диалоговом окне:
                         mDialogBuilder
@@ -109,31 +114,157 @@ public class MainActivity extends AppCompatActivity {
                                 .setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog,int id) {
-                                                //Вводим текст и отображаем в строке ввода на основном экране:
-                                                TextView tv = new TextView(getApplicationContext());
-                                                tv.setPadding(15,15,15,15);
-                                                //tv.setBackgroundColor(Color.GREEN);
-                                                tv.setTextColor(Color.WHITE);
-                                                tv.setTextSize(1,20);
-                                                tv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                                                //tv.setPaddingRelative(15,15,15,15);
-                                                tv.setId(USERID + countID);
-                                                l2.addView(tv);
-                                                tv.setText(userInput.getText());
 
-                                                /*
-                                                TextView mass = new TextView(getApplicationContext());
-                                                mass.setTextColor(Color.WHITE);
-                                                mass.setBackgroundColor(Color.RED);
-                                                mass.setTextSize(1,20);
-                                                mass.setLayoutParams(new LinearLayout.LayoutParams(15, 25));
-                                                mass.setPaddingRelative(50,50,50,50);
-                                                mass.setId(USERID + countID);
-                                                l2.addView(mass);
-                                                mass.setText(massInput.getText());
-                                                */
+                                                RelativeLayout rl = new RelativeLayout(getApplicationContext());
+                                                rl.setBackgroundColor(Color.BLACK);
+                                                rl.setPadding(0,0,0,20);
+                                                rl.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                                                l2.addView(rl);
+
+                                                int a = 1;
+
+                                                TextView tv_eat = new TextView(getApplicationContext());
+                                                tv_eat.setBackgroundColor(Color.BLACK);
+                                                tv_eat.setTextColor(Color.WHITE);
+                                                tv_eat.setTextSize(15);
+                                                tv_eat.setText(usereat.getText());
+                                                tv_eat.setId(USERID + countID + a);
+                                                RelativeLayout.LayoutParams tv_eatParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_eatParams.setMargins(20,20,0,0);
+                                                rl.addView(tv_eat, tv_eatParams);
+                                                a++;
+
+                                                TextView tv_mass = new TextView(getApplicationContext());
+                                                tv_mass.setBackgroundColor(Color.BLACK);
+                                                tv_mass.setTextColor(Color.WHITE);
+                                                tv_mass.setTextSize(15);
+                                                tv_mass.setText(usermass.getText()+"г");
+                                                tv_mass.setId(USERID + countID + a);
+                                                RelativeLayout.LayoutParams tv_massParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_massParams.addRule(RelativeLayout.BELOW, tv_eat.getId());
+                                                tv_massParams.setMargins(20,20,0,0);
+                                                rl.addView(tv_mass, tv_massParams);
+                                                a++;
+
+                                                //Текстовые view
+
+                                                //БЕЛКИ
+                                                TextView tv_belk = new TextView(getApplicationContext());
+                                                tv_belk.setBackgroundColor(Color.BLACK);
+                                                tv_belk.setText("Белки");
+                                                tv_belk.setTextColor(Color.WHITE);
+                                                tv_belk.setTextSize(10);
+                                                tv_belk.setId(USERID + countID + a);
+                                                RelativeLayout.LayoutParams tv_belkParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_belkParams.addRule(RelativeLayout.BELOW, tv_eat.getId());
+                                                tv_belkParams.addRule(RelativeLayout.RIGHT_OF,tv_mass.getId());
+                                                tv_belkParams.setMargins(100,20,0,0);
+                                                rl.addView(tv_belk, tv_belkParams);
+                                                a++;
+
+                                                //ЖИРЫ
+                                                TextView tv_zhir = new TextView(getApplicationContext());
+                                                tv_zhir.setBackgroundColor(Color.BLACK);
+                                                tv_zhir.setText("Жиры");
+                                                tv_zhir.setTextColor(Color.WHITE);
+                                                tv_zhir.setTextSize(10);
+                                                tv_zhir.setId(USERID + countID + a);
+                                                RelativeLayout.LayoutParams tv_zhirParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_zhirParams.addRule(RelativeLayout.BELOW, tv_eat.getId());
+                                                tv_zhirParams.addRule(RelativeLayout.RIGHT_OF,tv_belk.getId());
+                                                tv_zhirParams.setMargins(100,20,0,0);
+                                                rl.addView(tv_zhir, tv_zhirParams);
+                                                a++;
+
+                                                //УГЛЕВОДЫ
+                                                TextView tv_ugl = new TextView(getApplicationContext());
+                                                tv_ugl.setBackgroundColor(Color.BLACK);
+                                                tv_ugl.setText("Углеводы");
+                                                tv_ugl.setTextColor(Color.WHITE);
+                                                tv_ugl.setTextSize(10);
+                                                tv_ugl.setId(USERID + countID + a);
+                                                RelativeLayout.LayoutParams tv_uglParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_uglParams.addRule(RelativeLayout.BELOW, tv_eat.getId());
+                                                tv_uglParams.addRule(RelativeLayout.RIGHT_OF,tv_zhir.getId());
+                                                tv_uglParams.setMargins(100,20,0,0);
+                                                rl.addView(tv_ugl, tv_uglParams);
+                                                a++;
+
+                                                //КАЛЛОРИИ
+                                                TextView tv_kkal = new TextView(getApplicationContext());
+                                                tv_kkal.setBackgroundColor(Color.BLACK);
+                                                tv_kkal.setText("Ккал");
+                                                tv_kkal.setTextColor(Color.WHITE);
+                                                tv_kkal.setTextSize(15);
+                                                tv_kkal.setId(USERID + countID + a);
+                                                RelativeLayout.LayoutParams tv_kkalParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_kkalParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,tv_eat.getId());
+                                                tv_kkalParams.setMargins(0,20,20,0);
+                                                rl.addView(tv_kkal, tv_kkalParams);
+                                                a++;
+
+                                                //Числовые View
+
+                                                //КОЛ-ВО БЕЛКОВ
+                                                TextView tv_belk_num = new TextView(getApplicationContext());
+                                                tv_belk_num.setBackgroundColor(Color.BLACK);
+                                                tv_belk_num.setTextColor(Color.WHITE);
+                                                tv_belk_num.setTextSize(10);
+                                                tv_belk_num.setId(USERID + countID + a);
+                                                tv_belk_num.setText(userbelk.getText());
+                                                RelativeLayout.LayoutParams tv_belk_numParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_belk_numParams.addRule(RelativeLayout.BELOW, tv_belk.getId());
+                                                tv_belk_numParams.addRule(RelativeLayout.RIGHT_OF, tv_mass.getId());
+                                                tv_belk_numParams.setMargins(130,20,0,0);
+                                                rl.addView(tv_belk_num, tv_belk_numParams);
+                                                a++;
+
+                                                //КОЛ-ВО ЖИРОВ
+                                                TextView tv_zhir_num = new TextView(getApplicationContext());
+                                                tv_zhir_num.setBackgroundColor(Color.BLACK);
+                                                tv_zhir_num.setTextColor(Color.WHITE);
+                                                tv_zhir_num.setTextSize(10);
+                                                tv_zhir_num.setId(USERID + countID + a);
+                                                tv_zhir_num.setText(userzhir.getText());
+                                                RelativeLayout.LayoutParams tv_zhir_numParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_zhir_numParams.addRule(RelativeLayout.BELOW, tv_zhir.getId());
+                                                tv_zhir_numParams.addRule(RelativeLayout.RIGHT_OF, tv_belk.getId());
+                                                tv_zhir_numParams.setMargins(130,20,0,0);
+                                                rl.addView(tv_zhir_num, tv_zhir_numParams);
+                                                a++;
+
+                                                //КОЛ-ВО УГЛЕВОДОВ
+                                                TextView tv_ugl_num = new TextView(getApplicationContext());
+                                                tv_ugl_num.setBackgroundColor(Color.BLACK);
+                                                tv_ugl_num.setTextColor(Color.WHITE);
+                                                tv_ugl_num.setTextSize(10);
+                                                tv_ugl_num.setId(USERID + countID + a);
+                                                tv_ugl_num.setText(userugl.getText());
+                                                RelativeLayout.LayoutParams tv_ugl_numParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_ugl_numParams.addRule(RelativeLayout.BELOW, tv_ugl.getId());
+                                                tv_ugl_numParams.addRule(RelativeLayout.RIGHT_OF, tv_zhir.getId());
+                                                tv_ugl_numParams.setMargins(130,20,0,0);
+                                                rl.addView(tv_ugl_num, tv_ugl_numParams);
+                                                a++;
+
+                                                //КОЛ-ВО КАЛЛОРИЙ
+
+                                                TextView tv_kkal_num = new TextView(getApplicationContext());
+                                                tv_kkal_num.setBackgroundColor(Color.BLACK);
+                                                tv_kkal_num.setTextColor(Color.WHITE);
+                                                tv_kkal_num.setTextSize(25);
+                                                tv_kkal_num.setText("745");
+                                                //tv_kkal_num.setInte(vc);
+
+                                                tv_kkal_num.setId(USERID + countID + a);
+                                                RelativeLayout.LayoutParams tv_kkal_numParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                                tv_kkal_numParams.addRule(RelativeLayout.BELOW,tv_kkal.getId());
+                                                tv_kkal_numParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,tv_eat.getId());
+                                                tv_kkal_numParams.setMargins(0,20,20,0);
+                                                rl.addView(tv_kkal_num, tv_kkal_numParams);
+                                                a++;
+
                                             }
-
                                         })
 
                                 .setNegativeButton("Отмена",
