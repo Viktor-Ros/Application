@@ -26,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
     final Context context = this;
     private Button button;
     private LinearLayout linearLayout;
+    private TextView tvBelkResult;
+    private TextView tvZhirResult;
+    private TextView tvUglResult;
+    private TextView tvKallResult;
+    private double belk1, belk2, zhir1, zhir2, ugl1, ugl2, kall1, kall2;
+
+
 
 
     private final int USERID = 6000;
@@ -40,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.button);
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout1);
+        tvBelkResult = (TextView) findViewById(R.id.rltw5 );
+        tvZhirResult = (TextView) findViewById(R.id.rltw6 );
+        tvUglResult = (TextView) findViewById(R.id.rltw7 );
+        tvKallResult = (TextView) findViewById(R.id.rltw8 );
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -139,6 +150,24 @@ public class MainActivity extends AppCompatActivity {
                                                 double  zhir_double = Double.parseDouble(userzhir.getText().toString());
                                                 double  ugl_double = Double.parseDouble(userugl.getText().toString());
                                                 double  kall_double = mass_double*(belk_double*4 + zhir_double*9 + ugl_double*4)/100;
+
+
+                                                belk1 = belk_double*mass_double/100 + belk2;
+                                                zhir1 = zhir_double*mass_double/100 + zhir2;
+                                                ugl1 = ugl_double*mass_double/100 + ugl2;
+                                                kall1 = kall_double + kall2;
+
+                                                belk2 = belk1;
+                                                zhir2 = zhir1;
+                                                ugl2 = ugl1;
+                                                kall2 = kall1;
+
+                                                tvBelkResult.setText(Double.toString(belk2));
+                                                tvZhirResult.setText(Double.toString(zhir2));
+                                                tvUglResult.setText(Double.toString(ugl2));
+                                                tvKallResult.setText(Double.toString(kall2));
+
+
 
                                                 RelativeLayout rl = new RelativeLayout(getApplicationContext());
                                                 rl.setBackgroundColor(Color.BLACK);
@@ -378,7 +407,6 @@ public class MainActivity extends AppCompatActivity {
                                 userbelk.addTextChangedListener(loginTextWatcher);
                                 userzhir.addTextChangedListener(loginTextWatcher);
                                 userugl.addTextChangedListener(loginTextWatcher);
-
                             }
                         });
                         //отображаем диалог:
@@ -389,12 +417,8 @@ public class MainActivity extends AppCompatActivity {
                         new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT));
-
                 countID++;
             }
-        });
-
-        //тут кончается слушатель на первую кнопку
+        });//тут кончается слушатель на первую кнопку
     }
-
 }
