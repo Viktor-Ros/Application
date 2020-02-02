@@ -21,9 +21,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//Сделай кнопку меню, чтобы сбросить все приемы пищи
+
 public class MainActivity extends AppCompatActivity {
 
-    final Context context = this;
+    final Context context = this;  // Зачем тебе явный контекст? передавай везде "this" а эту переменную удали
     private Button button;
     private LinearLayout linearLayout;
     private TextView tvBelkResult;
@@ -35,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private final int USERID = 6000;
-    private int countID;
+    private final int USERID = 6000;  // Что это такое?
+    private int countID;  // это не countID вроде, если это считать номера перекусов, назови её mealNumber или как-то так
 
 
 
@@ -47,10 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.button);
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout1);
-        tvBelkResult = (TextView) findViewById(R.id.rltw5 );
+        tvBelkResult = (TextView) findViewById(R.id.rltw5 );  // что такое rltw5 и его друзья (6, 7, 8)
         tvZhirResult = (TextView) findViewById(R.id.rltw6 );
         tvUglResult = (TextView) findViewById(R.id.rltw7 );
         tvKallResult = (TextView) findViewById(R.id.rltw8 );
+
+//        Надо будет вытащить этого слушателя в отдельный класc.
+//        Составь список, что он берёт от MainActivity - USERID, linearLayout
+//        и тд - и посмотри как у нас было в GreenAdapter (там адаптер помнил порядковый номер. а не MainActivity)
+//        может получится по аналогии сделать.
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -80,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 b.setId(USERID + countID);
                 l.addView(b);
 
+                // Попробуй вынеси все эти генерации Вьюх в xml ресурсы а тут надувай их c inflator
                 LinearLayout ln1 = new LinearLayout(getApplicationContext());
                 ln1.setBackgroundColor(Color.WHITE);
                 ln1.setOrientation(LinearLayout.VERTICAL);

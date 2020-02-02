@@ -7,6 +7,12 @@ android:layout_height="fill_parent"
 android:orientation="vertical"
 android:padding="10dp" >
 
+<!--там много повторяющихся Вьюх (ток текст менятся).
+Нет способа как-то вынести всё в какие-нибудь шаблоны?-->
+
+
+<!--     Весь текст надо выностить в strings.xml-->
+
     <TextView
         android:id="@+id/tv"
         android:layout_width="400dp"
@@ -91,6 +97,8 @@ android:padding="10dp" >
         <requestFocus />
     </EditText>
 
+<!--    В layout_toEndOf="@+id/tv2" плюс обязателен? без него не работает
+(кажется должно работать, но я не знаю наверняка)-->
     <EditText
         android:id="@+id/input_mass"
         android:layout_width="150dp"
