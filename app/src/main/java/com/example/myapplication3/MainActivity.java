@@ -8,14 +8,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -47,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.button);
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout1);
-        tvBelkResult = (TextView) findViewById(R.id.rltw5 );
-        tvZhirResult = (TextView) findViewById(R.id.rltw6 );
-        tvUglResult = (TextView) findViewById(R.id.rltw7 );
-        tvKallResult = (TextView) findViewById(R.id.rltw8 );
+        tvBelkResult = (TextView) findViewById(R.id.rltw5);
+        tvZhirResult = (TextView) findViewById(R.id.rltw6);
+        tvUglResult = (TextView) findViewById(R.id.rltw7);
+        tvKallResult = (TextView) findViewById(R.id.rltw8);
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -134,10 +132,6 @@ public class MainActivity extends AppCompatActivity {
                         final EditText userzhir = (EditText) promptsView.findViewById(R.id.input_zhir);
                         final EditText userugl = (EditText) promptsView.findViewById(R.id.input_ugl);
 
-
-
-
-
                         //Настраиваем сообщение в диалоговом окне:
                         mDialogBuilder.setCancelable(false)
                                 .setPositiveButton("OK",
@@ -150,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
                                                 double  zhir_double = Double.parseDouble(userzhir.getText().toString());
                                                 double  ugl_double = Double.parseDouble(userugl.getText().toString());
                                                 double  kall_double = mass_double*(belk_double*4 + zhir_double*9 + ugl_double*4)/100;
-
 
                                                 belk1 = belk_double*mass_double/100 + belk2;
                                                 zhir1 = zhir_double*mass_double/100 + zhir2;
@@ -167,186 +160,24 @@ public class MainActivity extends AppCompatActivity {
                                                 tvUglResult.setText(Double.toString(ugl2));
                                                 tvKallResult.setText(Double.toString(kall2));
 
+                                                LayoutInflater li = getLayoutInflater();
 
+                                                View it = li.inflate(R.layout.product_layout, l2, false);
 
-                                                RelativeLayout rl = new RelativeLayout(getApplicationContext());
-                                                rl.setBackgroundColor(Color.BLACK);
-                                                rl.setPadding(0,0,0,20);
-                                                rl.setLayoutParams(new RelativeLayout.LayoutParams(
-                                                        ViewGroup.LayoutParams.MATCH_PARENT,
-                                                        ViewGroup.LayoutParams.WRAP_CONTENT));
-                                                l2.addView(rl);
+                                                l2.addView(it);
 
+                                                TextView tv_mass = (TextView) it.findViewById(R.id.tv_mass);
+                                                TextView tv_belk_num = (TextView) it.findViewById(R.id.tv_belk_num);
+                                                TextView tv_zhir_num = (TextView) it.findViewById(R.id.tv_zhir_num);
+                                                TextView tv_ugl_num = (TextView) it.findViewById(R.id.tv_ugl_num);
+                                                TextView tv_kkal_num = (TextView) it.findViewById(R.id.tv_kkal_num);
 
-
-                                                //ТЕКСТОВЫЕ VIEW
-
-                                                int a = 1;
-
-                                                // НАЗВАНИЕ ПРОДУКТА
-
-                                                TextView tv_eat = new TextView(getApplicationContext());
-                                                tv_eat.setBackgroundColor(Color.BLACK);
-                                                tv_eat.setTextColor(Color.WHITE);
-                                                tv_eat.setTextSize(15);
-                                                tv_eat.setText(usereat.getText());
-                                                tv_eat.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_eatParams =
-                                                        new RelativeLayout.LayoutParams(
-                                                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                                                        60);
-                                                tv_eatParams.setMargins(20,20,0,0);
-                                                rl.addView(tv_eat, tv_eatParams);
-                                                a++;
-
-                                                //МАССА ПРОДУКТА ЧИСЛОВАЯ
-
-                                                TextView tv_mass = new TextView(getApplicationContext());
-                                                tv_mass.setBackgroundColor(Color.BLACK);
-                                                tv_mass.setTextColor(Color.WHITE);
-                                                tv_mass.setTextSize(15);
-                                                tv_mass.setGravity(Gravity.LEFT);
                                                 tv_mass.setText(Double.toString(mass_double)+"г");
-                                                tv_mass.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_massParams =
-                                                        new RelativeLayout.LayoutParams(160,80);
-                                                tv_massParams.addRule(RelativeLayout.BELOW, tv_eat.getId());
-                                                tv_massParams.setMargins(20,20,0,0);
-                                                rl.addView(tv_mass, tv_massParams);
-                                                a++;
-
-                                                //БЕЛКИ
-                                                TextView tv_belk = new TextView(getApplicationContext());
-                                                tv_belk.setBackgroundColor(Color.BLACK);
-                                                tv_belk.setText("Белки");
-                                                tv_belk.setTextColor(Color.WHITE);
-                                                tv_belk.setTextSize(10);
-                                                tv_belk.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_belkParams =
-                                                        new RelativeLayout.LayoutParams(
-                                                                ViewGroup.LayoutParams.WRAP_CONTENT, 40);
-                                                tv_belkParams.addRule(RelativeLayout.BELOW, tv_eat.getId());
-                                                tv_belkParams.addRule(RelativeLayout.RIGHT_OF,tv_mass.getId());
-                                                tv_belkParams.setMargins(40,20,0,0);
-                                                rl.addView(tv_belk, tv_belkParams);
-                                                a++;
-
-                                                //ЖИРЫ
-                                                TextView tv_zhir = new TextView(getApplicationContext());
-                                                tv_zhir.setBackgroundColor(Color.BLACK);
-                                                tv_zhir.setText("Жиры");
-                                                tv_zhir.setTextColor(Color.WHITE);
-                                                tv_zhir.setTextSize(10);
-                                                tv_zhir.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_zhirParams =
-                                                        new RelativeLayout.LayoutParams(
-                                                                ViewGroup.LayoutParams.WRAP_CONTENT,40);
-                                                tv_zhirParams.addRule(RelativeLayout.BELOW, tv_eat.getId());
-                                                tv_zhirParams.addRule(RelativeLayout.RIGHT_OF,tv_belk.getId());
-                                                tv_zhirParams.setMargins(100,20,0,0);
-                                                rl.addView(tv_zhir, tv_zhirParams);
-                                                a++;
-
-                                                //УГЛЕВОДЫ
-                                                TextView tv_ugl = new TextView(getApplicationContext());
-                                                tv_ugl.setBackgroundColor(Color.BLACK);
-                                                tv_ugl.setText("Углеводы");
-                                                tv_ugl.setTextColor(Color.WHITE);
-                                                tv_ugl.setTextSize(10);
-                                                tv_ugl.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_uglParams =
-                                                        new RelativeLayout.LayoutParams(
-                                                                ViewGroup.LayoutParams.WRAP_CONTENT,40);
-                                                tv_uglParams.addRule(RelativeLayout.BELOW, tv_eat.getId());
-                                                tv_uglParams.addRule(RelativeLayout.RIGHT_OF,tv_zhir.getId());
-                                                tv_uglParams.setMargins(100,20,0,0);
-                                                rl.addView(tv_ugl, tv_uglParams);
-                                                a++;
-
-                                                //КАЛЛОРИИ
-                                                TextView tv_kkal = new TextView(getApplicationContext());
-                                                tv_kkal.setBackgroundColor(Color.BLACK);
-                                                tv_kkal.setText("Ккал");
-                                                tv_kkal.setTextColor(Color.WHITE);
-                                                tv_kkal.setTextSize(15);
-                                                tv_kkal.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_kkalParams =
-                                                        new RelativeLayout.LayoutParams(
-                                                                ViewGroup.LayoutParams.WRAP_CONTENT, 60);
-                                                tv_kkalParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,tv_eat.getId());
-                                                tv_kkalParams.setMargins(0,20,20,0);
-                                                rl.addView(tv_kkal, tv_kkalParams);
-                                                a++;
-
-
-
-                                                //ЧИСЛОВЫЕ View
-
-                                                //КОЛ-ВО БЕЛКОВ
-                                                TextView tv_belk_num = new TextView(getApplicationContext());
-                                                tv_belk_num.setBackgroundColor(Color.BLACK);
-                                                tv_belk_num.setTextColor(Color.WHITE);
-                                                tv_belk_num.setTextSize(10);
-                                                tv_belk_num.setGravity(Gravity.CENTER);
                                                 tv_belk_num.setText(Double.toString(belk_double*mass_double/100));
-                                                tv_belk_num.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_belk_numParams =
-                                                        new RelativeLayout.LayoutParams(80,40);
-                                                tv_belk_numParams.addRule(RelativeLayout.BELOW, tv_belk.getId());
-                                                tv_belk_numParams.addRule(RelativeLayout.RIGHT_OF, tv_mass.getId());
-                                                tv_belk_numParams.setMargins(40,20,0,0);
-                                                rl.addView(tv_belk_num, tv_belk_numParams);
-                                                a++;
-
-                                                //КОЛ-ВО ЖИРОВ
-                                                TextView tv_zhir_num = new TextView(getApplicationContext());
-                                                tv_zhir_num.setBackgroundColor(Color.BLACK);
-                                                tv_zhir_num.setTextColor(Color.WHITE);
-                                                tv_zhir_num.setTextSize(10);
-                                                tv_zhir_num.setGravity(Gravity.CENTER);
                                                 tv_zhir_num.setText(Double.toString(zhir_double*mass_double/100));
-                                                tv_zhir_num.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_zhir_numParams =
-                                                        new RelativeLayout.LayoutParams(80,40);
-                                                tv_zhir_numParams.addRule(RelativeLayout.BELOW, tv_zhir.getId());
-                                                tv_zhir_numParams.addRule(RelativeLayout.RIGHT_OF, tv_belk.getId());
-                                                tv_zhir_numParams.setMargins(110,20,0,0);
-                                                rl.addView(tv_zhir_num, tv_zhir_numParams);
-                                                a++;
-
-                                                //КОЛ-ВО УГЛЕВОДОВ
-
-                                                TextView tv_ugl_num = new TextView(getApplicationContext());
-                                                tv_ugl_num.setBackgroundColor(Color.BLACK);
-                                                tv_ugl_num.setTextColor(Color.WHITE);
-                                                tv_ugl_num.setTextSize(10);
-                                                tv_ugl_num.setGravity(Gravity.CENTER);
                                                 tv_ugl_num.setText(Double.toString(ugl_double*mass_double/100));
-                                                tv_ugl_num.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_ugl_numParams =
-                                                        new RelativeLayout.LayoutParams(80,40);
-                                                tv_ugl_numParams.addRule(RelativeLayout.BELOW, tv_ugl.getId());
-                                                tv_ugl_numParams.addRule(RelativeLayout.RIGHT_OF, tv_zhir.getId());
-                                                tv_ugl_numParams.setMargins(120,20,0,0);
-                                                rl.addView(tv_ugl_num, tv_ugl_numParams);
-                                                a++;
-
-                                                //КОЛ-ВО КАЛЛОРИЙ
-
-                                                TextView tv_kkal_num = new TextView(getApplicationContext());
-                                                tv_kkal_num.setBackgroundColor(Color.BLACK);
-                                                tv_kkal_num.setTextColor(Color.WHITE);
-                                                tv_kkal_num.setTextSize(18);
-                                                tv_kkal_num.setGravity(Gravity.RIGHT);
                                                 tv_kkal_num.setText(Double.toString(kall_double));
-                                                tv_kkal_num.setId(USERID + countID + a);
-                                                RelativeLayout.LayoutParams tv_kkal_numParams =
-                                                        new RelativeLayout.LayoutParams(170,60);
-                                                tv_kkal_numParams.addRule(RelativeLayout.BELOW,tv_kkal.getId());
-                                                tv_kkal_numParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,tv_eat.getId());
-                                                tv_kkal_numParams.setMargins(0,60,20,0);
-                                                rl.addView(tv_kkal_num, tv_kkal_numParams);
-                                                a++;
+
                                             }
                                         })
 
@@ -361,15 +192,12 @@ public class MainActivity extends AppCompatActivity {
                         AlertDialog alertDialog = mDialogBuilder.create();
                         //и отображаем его:
 
-
                         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-
 
                             @Override
                             public void onShow(DialogInterface dialog) {
                                 final Button buttonPositive = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
                                 buttonPositive.setEnabled(false);
-
 
                                 TextWatcher loginTextWatcher = new TextWatcher() {
 
