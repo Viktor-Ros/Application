@@ -1,10 +1,8 @@
 package com.example.myapplication3;
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,27 +13,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     final Context context = this;
     private Button button;
-    private LinearLayout linearLayout;
+    private LinearLayout linearLayout1;
+    private LinearLayout linearLayout3;
     private TextView tvBelkResult;
     private TextView tvZhirResult;
     private TextView tvUglResult;
     private TextView tvKallResult;
     private double belk1, belk2, zhir1, zhir2, ugl1, ugl2, kall1, kall2;
-
-
-
-
-    private final int USERID = 6000;
-    private int countID;
-
+    private int countID = 1;
 
 
     @Override
@@ -44,70 +35,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         button = (Button) findViewById(R.id.button);
-        linearLayout = (LinearLayout) findViewById(R.id.linearLayout1);
         tvBelkResult = (TextView) findViewById(R.id.rltw5);
         tvZhirResult = (TextView) findViewById(R.id.rltw6);
         tvUglResult = (TextView) findViewById(R.id.rltw7);
         tvKallResult = (TextView) findViewById(R.id.rltw8);
+        linearLayout1 = (LinearLayout) findViewById(R.id.linearLayout1);
 
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                LinearLayout l = new LinearLayout(getApplicationContext());
-                l.setBackgroundColor(Color.WHITE);
-                l.setPadding(5,5,5,5);
-                l.setOrientation(LinearLayout.HORIZONTAL);
-                l.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                600));
-                l.setId(USERID + countID);
-                linearLayout.addView(l);
+                LayoutInflater li1 = getLayoutInflater();
 
-                Button b = new Button(getApplicationContext());
-                b.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                100,
-                                ViewGroup.LayoutParams.MATCH_PARENT));
-                b.setBackgroundColor(Color.BLACK);
-                b.setTextColor(Color.WHITE);
-                b.setPadding(30,80,30,80);
+                View it1 = li1.inflate(R.layout.product_layout1, linearLayout1, false);
+
+                Button b = (Button) it1.findViewById(R.id.b);
                 b.setText("Перекус №" + Integer.toString(countID));
-                b.setId(USERID + countID);
-                l.addView(b);
 
-                LinearLayout ln1 = new LinearLayout(getApplicationContext());
-                ln1.setBackgroundColor(Color.WHITE);
-                ln1.setOrientation(LinearLayout.VERTICAL);
-                ln1.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                5,
-                                ViewGroup.LayoutParams.MATCH_PARENT));
-                ln1.setId(USERID + countID);
-                l.addView(ln1);
+                final LinearLayout l2 = (LinearLayout) it1.findViewById(R.id.l2);
 
-                LinearLayout ln2 = new LinearLayout(getApplicationContext());
-                ln2.setBackgroundColor(Color.BLACK);
-                ln2.setOrientation(LinearLayout.VERTICAL);
-                ln2.setLayoutParams(
-                        new LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                15));
-                ln2.setId(USERID + countID);
-                linearLayout.addView(ln2);
+                linearLayout3 = (LinearLayout) it1.findViewById(R.id.linearLayout3);
 
-                final LinearLayout l2 = new LinearLayout(getApplicationContext());
-                l2.setPadding(0,0,0,0);
-                l2.setBackgroundColor(Color.BLACK);
-                l2.setOrientation(LinearLayout.VERTICAL); //осталось от вертикального лайаута
-                l2.setLayoutParams(new
-                        LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.MATCH_PARENT));
-                l2.setId(USERID + countID);
-                l.addView(l2);
+                linearLayout1.addView(it1);
 
                 b.setOnClickListener(new View.OnClickListener() {
 
@@ -160,23 +110,25 @@ public class MainActivity extends AppCompatActivity {
                                                 tvUglResult.setText(Double.toString(ugl2));
                                                 tvKallResult.setText(Double.toString(kall2));
 
-                                                LayoutInflater li = getLayoutInflater();
+                                                LayoutInflater li2 = getLayoutInflater();
 
-                                                View it = li.inflate(R.layout.product_layout, l2, false);
+                                                View it2 = li2.inflate(R.layout.product_layout2, l2, false);
 
-                                                l2.addView(it);
+                                                TextView tv_eat = (TextView) it2.findViewById(R.id.tv_eat);
+                                                TextView tv_mass = (TextView) it2.findViewById(R.id.tv_mass);
+                                                TextView tv_belk_num = (TextView) it2.findViewById(R.id.tv_belk_num);
+                                                TextView tv_zhir_num = (TextView) it2.findViewById(R.id.tv_zhir_num);
+                                                TextView tv_ugl_num = (TextView) it2.findViewById(R.id.tv_ugl_num);
+                                                TextView tv_kkal_num = (TextView) it2.findViewById(R.id.tv_kkal_num);
 
-                                                TextView tv_mass = (TextView) it.findViewById(R.id.tv_mass);
-                                                TextView tv_belk_num = (TextView) it.findViewById(R.id.tv_belk_num);
-                                                TextView tv_zhir_num = (TextView) it.findViewById(R.id.tv_zhir_num);
-                                                TextView tv_ugl_num = (TextView) it.findViewById(R.id.tv_ugl_num);
-                                                TextView tv_kkal_num = (TextView) it.findViewById(R.id.tv_kkal_num);
-
+                                                tv_eat.setText(usereat.getText().toString());
                                                 tv_mass.setText(Double.toString(mass_double)+"г");
                                                 tv_belk_num.setText(Double.toString(belk_double*mass_double/100));
                                                 tv_zhir_num.setText(Double.toString(zhir_double*mass_double/100));
                                                 tv_ugl_num.setText(Double.toString(ugl_double*mass_double/100));
                                                 tv_kkal_num.setText(Double.toString(kall_double));
+
+                                                l2.addView(it2);
 
                                             }
                                         })
@@ -241,10 +193,12 @@ public class MainActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
-                l.setLayoutParams(
+
+                linearLayout3.setLayoutParams(
                         new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT));
+
                 countID++;
             }
         });//тут кончается слушатель на первую кнопку

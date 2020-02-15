@@ -100,14 +100,15 @@ android:padding="10dp" >
         android:layout_marginStart="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="50dp"
-        android:layout_toEndOf="@+id/tv2">
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/tv2"
+        android:inputType="numberDecimal">
 
 
     </EditText>
 
     <EditText
-        android:id="@+id/input_text7"
+        android:id="@+id/input_belk"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_below="@+id/input_mass"
@@ -115,36 +116,39 @@ android:padding="10dp" >
         android:layout_marginStart="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="50dp"
-        android:layout_toEndOf="@+id/tv2">
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/tv2"
+        android:inputType="numberDecimal">
 
     </EditText>
 
     <EditText
-        android:id="@+id/input_text8"
+        android:id="@+id/input_zhir"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/input_text7"
+        android:layout_below="@+id/input_belk"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="50dp"
-        android:layout_toEndOf="@+id/tv2">
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/tv2"
+        android:inputType="numberDecimal">
 
     </EditText>
 
     <EditText
-        android:id="@+id/input_text9"
+        android:id="@+id/input_ugl"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/input_text8"
+        android:layout_below="@+id/input_zhir"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="50dp"
-        android:layout_toEndOf="@+id/tv2">
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@+id/tv2"
+        android:inputType="numberDecimal">
 
 
     </EditText>
