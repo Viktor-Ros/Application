@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvZhirResult;
     private TextView tvUglResult;
     private TextView tvKallResult;
-    private double belk1, belk2, zhir1, zhir2, ugl1, ugl2, kall1, kall2;
+    private double belk1, zhir1, ugl1, kall1;
     private int countID = 1;
 
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 View it1 = li1.inflate(R.layout.product_layout1, linearLayout1, false);
 
                 Button b = (Button) it1.findViewById(R.id.b);
+
                 b.setText("Перекус №" + Integer.toString(countID));
 
                 final LinearLayout l2 = (LinearLayout) it1.findViewById(R.id.l2);
@@ -95,20 +97,17 @@ public class MainActivity extends AppCompatActivity {
                                                 double  ugl_double = Double.parseDouble(userugl.getText().toString());
                                                 double  kall_double = mass_double*(belk_double*4 + zhir_double*9 + ugl_double*4)/100;
 
-                                                belk1 = belk_double*mass_double/100 + belk2;
-                                                zhir1 = zhir_double*mass_double/100 + zhir2;
-                                                ugl1 = ugl_double*mass_double/100 + ugl2;
-                                                kall1 = kall_double + kall2;
+                                                belk1 = belk_double*mass_double/100 + belk1;
+                                                zhir1 = zhir_double*mass_double/100 + zhir1;
+                                                ugl1 = ugl_double*mass_double/100 + ugl1;
+                                                kall1 = kall_double + kall1;
 
-                                                belk2 = belk1;
-                                                zhir2 = zhir1;
-                                                ugl2 = ugl1;
-                                                kall2 = kall1;
+                                                NumberFormat indicatorFormat = new DecimalFormat("#.#");//функция для отображения показателей без лишних нулей
 
-                                                tvBelkResult.setText(Double.toString(belk2));
-                                                tvZhirResult.setText(Double.toString(zhir2));
-                                                tvUglResult.setText(Double.toString(ugl2));
-                                                tvKallResult.setText(Double.toString(kall2));
+                                                tvBelkResult.setText(indicatorFormat.format(belk1));
+                                                tvZhirResult.setText(indicatorFormat.format(zhir1));
+                                                tvUglResult.setText(indicatorFormat.format(ugl1));
+                                                tvKallResult.setText(indicatorFormat.format(kall1));
 
                                                 LayoutInflater li2 = getLayoutInflater();
 
@@ -122,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
                                                 TextView tv_kkal_num = (TextView) it2.findViewById(R.id.tv_kkal_num);
 
                                                 tv_eat.setText(usereat.getText().toString());
-                                                tv_mass.setText(Double.toString(mass_double)+"г");
-                                                tv_belk_num.setText(Double.toString(belk_double*mass_double/100));
-                                                tv_zhir_num.setText(Double.toString(zhir_double*mass_double/100));
-                                                tv_ugl_num.setText(Double.toString(ugl_double*mass_double/100));
-                                                tv_kkal_num.setText(Double.toString(kall_double));
+                                                tv_mass.setText(indicatorFormat.format(mass_double)+"г");
+                                                tv_belk_num.setText(indicatorFormat.format(belk_double*mass_double/100));
+                                                tv_zhir_num.setText(indicatorFormat.format(zhir_double*mass_double/100));
+                                                tv_ugl_num.setText(indicatorFormat.format(ugl_double*mass_double/100));
+                                                tv_kkal_num.setText(indicatorFormat.format(kall_double));
 
                                                 l2.addView(it2);
 
@@ -144,51 +143,9 @@ public class MainActivity extends AppCompatActivity {
                         AlertDialog alertDialog = mDialogBuilder.create();
                         //и отображаем его:
 
-                        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                        DialogButtonOff myDialog = new DialogButtonOff();//для отображения кнопки диалога при заполнении всех показателей
+                        myDialog.ButtonOkOff(alertDialog, usereat, usermass, userbelk, userzhir, userugl);
 
-                            @Override
-                            public void onShow(DialogInterface dialog) {
-                                final Button buttonPositive = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                                buttonPositive.setEnabled(false);
-
-                                TextWatcher loginTextWatcher = new TextWatcher() {
-
-                                    @Override
-                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                                    }
-                                    @Override
-                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                                        String userEatDialog = usereat.getText().toString().trim();
-                                        buttonPositive.setEnabled(!userEatDialog.isEmpty());
-
-                                        String userMassDialog = usermass.getText().toString().trim();
-                                        buttonPositive.setEnabled(!userMassDialog.isEmpty());
-
-                                        String userBelkDialog = userbelk.getText().toString().trim();
-                                        buttonPositive.setEnabled(!userBelkDialog.isEmpty());
-
-                                        String userZhirDialog = userzhir.getText().toString().trim();
-                                        buttonPositive.setEnabled(!userZhirDialog.isEmpty());
-
-                                        String userUglDialog = userugl.getText().toString().trim();
-                                        buttonPositive.setEnabled(!userUglDialog.isEmpty());
-
-                                    }
-                                    @Override
-                                    public void afterTextChanged(Editable s) {
-
-                                    }
-                                };
-
-                                usereat.addTextChangedListener(loginTextWatcher);
-                                usermass.addTextChangedListener(loginTextWatcher);
-                                userbelk.addTextChangedListener(loginTextWatcher);
-                                userzhir.addTextChangedListener(loginTextWatcher);
-                                userugl.addTextChangedListener(loginTextWatcher);
-                            }
-                        });
                         //отображаем диалог:
                         alertDialog.show();
                     }
