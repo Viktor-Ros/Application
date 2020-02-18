@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvZhirResult;
     private TextView tvUglResult;
     private TextView tvKallResult;
-    private double belk1, zhir1, ugl1, kall1;
     private int countID = 1;
 
 
@@ -41,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         tvUglResult = (TextView) findViewById(R.id.rltw7);
         tvKallResult = (TextView) findViewById(R.id.rltw8);
         linearLayout1 = (LinearLayout) findViewById(R.id.linearLayout1);
+
+        final NutritionFact myNutritionFact = new NutritionFact();
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -91,23 +92,18 @@ public class MainActivity extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog,int id) {
 
                                                 //ПЕРЕМЕННЫЕ БЖУК
-                                                double  mass_double = Double.parseDouble(usermass.getText().toString());
-                                                double  belk_double = Double.parseDouble(userbelk.getText().toString());
-                                                double  zhir_double = Double.parseDouble(userzhir.getText().toString());
-                                                double  ugl_double = Double.parseDouble(userugl.getText().toString());
-                                                double  kall_double = mass_double*(belk_double*4 + zhir_double*9 + ugl_double*4)/100;
-
-                                                belk1 = belk_double*mass_double/100 + belk1;
-                                                zhir1 = zhir_double*mass_double/100 + zhir1;
-                                                ugl1 = ugl_double*mass_double/100 + ugl1;
-                                                kall1 = kall_double + kall1;
+                                                final double  mass_double = Double.parseDouble(usermass.getText().toString());
+                                                final double  belk_double = Double.parseDouble(userbelk.getText().toString());
+                                                final double  zhir_double = Double.parseDouble(userzhir.getText().toString());
+                                                final double  ugl_double = Double.parseDouble(userugl.getText().toString());
+                                                final double  kall_double = mass_double*(belk_double*4 + zhir_double*9 + ugl_double*4)/100;
 
                                                 NumberFormat indicatorFormat = new DecimalFormat("#.#");//функция для отображения показателей без лишних нулей
 
-                                                tvBelkResult.setText(indicatorFormat.format(belk1));
-                                                tvZhirResult.setText(indicatorFormat.format(zhir1));
-                                                tvUglResult.setText(indicatorFormat.format(ugl1));
-                                                tvKallResult.setText(indicatorFormat.format(kall1));
+                                                tvBelkResult.setText(indicatorFormat.format(myNutritionFact.countBelk(belk_double*mass_double/100)));
+                                                tvZhirResult.setText(indicatorFormat.format(myNutritionFact.countZhir(zhir_double*mass_double/100)));
+                                                tvUglResult.setText(indicatorFormat.format(myNutritionFact.countUgl(ugl_double*mass_double/100)));
+                                                tvKallResult.setText(indicatorFormat.format(myNutritionFact.countKall(kall_double)));
 
                                                 LayoutInflater li2 = getLayoutInflater();
 
