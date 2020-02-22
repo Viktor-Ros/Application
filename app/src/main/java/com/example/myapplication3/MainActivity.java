@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         tvKallResult = (TextView) findViewById(R.id.rltw8);
         linearLayout1 = (LinearLayout) findViewById(R.id.linearLayout1);
 
-        final NutritionFact myNutritionFact = new NutritionFact();
+        final NutritionFact myNutritionFact1 = new NutritionFact();
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -90,14 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
                                                 //ПЕРЕМЕННЫЕ БЖУК
 
-                                                NutritionFact myNutritionFact2 = new NutritionFact(usermass.getText(), userbelk.getText(), userzhir.getText(), userugl.getText());
+                                                NutritionFact myNutritionFact2 = new NutritionFact(myNutritionFact1, usermass.getText(), userbelk.getText(), userzhir.getText(), userugl.getText());
 
-                                                NutritionFact myNutritionFact3 = new NutritionFact(myNutritionFact, usermass.getText(), userbelk.getText(), userzhir.getText(), userugl.getText());
-
-                                                tvBelkResult.setText(myNutritionFact.countBelk());
-                                                tvZhirResult.setText(myNutritionFact.countZhir());
-                                                tvUglResult.setText(myNutritionFact.countUgl());
-                                                tvKallResult.setText(myNutritionFact.countKall());
+                                                tvBelkResult.setText(myNutritionFact1.countBelk());
+                                                tvZhirResult.setText(myNutritionFact1.countZhir());
+                                                tvUglResult.setText(myNutritionFact1.countUgl());
+                                                tvKallResult.setText(myNutritionFact1.countKall());
 
                                                 LayoutInflater li2 = getLayoutInflater();
 

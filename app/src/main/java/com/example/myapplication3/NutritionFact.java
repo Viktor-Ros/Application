@@ -7,17 +7,27 @@ import java.text.NumberFormat;
 
 class NutritionFact {
 
-    double belk, zhir, ugl, mass, kall;
+    double belk, zhir, ugl, mass, kall, belk1, zhir1, ugl1, kall1, mass1;
 
     NumberFormat indicatorFormat = new DecimalFormat("#.#");//функция для отображения показателей без лишних нулей
 
-    public NutritionFact(Editable mass, Editable belk, Editable zhir, Editable ugl) {
+    public NutritionFact(NutritionFact other, Editable mass, Editable belk, Editable zhir, Editable ugl) {
 
         this.mass = Double.parseDouble(mass.toString());
         this.belk = Double.parseDouble(belk.toString());
         this.zhir = Double.parseDouble(zhir.toString());
         this.ugl = Double.parseDouble(ugl.toString());
         this.kall = (this.mass*(this.belk*4 + this.zhir*9 + this.ugl*4))/100;
+
+        other.mass1 = (Double.parseDouble(mass.toString()));
+        other.belk1 = (Double.parseDouble(belk.toString()))*other.mass1/100;
+        other.zhir1 = (Double.parseDouble(zhir.toString()))*other.mass1/100;
+        other.ugl1 = (Double.parseDouble(ugl.toString()))*other.mass1/100;
+        other.kall1 = other.belk1*4 + other.zhir1*9 + other.ugl1*4;
+
+    }
+
+    public NutritionFact() {
 
     }
 
@@ -47,21 +57,6 @@ class NutritionFact {
     public String getUgl(){
 
         return indicatorFormat.format(ugl*mass/100);
-    }
-
-    double belk1, zhir1, ugl1, kall1, mass1;
-
-    public NutritionFact(NutritionFact other, Editable mass, Editable belk, Editable zhir, Editable ugl) {
-
-        other.mass1 = (Double.parseDouble(mass.toString()));
-        other.belk1 = (Double.parseDouble(belk.toString()))*other.mass1/100;
-        other.zhir1 = (Double.parseDouble(zhir.toString()))*other.mass1/100;
-        other.ugl1 = (Double.parseDouble(ugl.toString()))*other.mass1/100;
-        other.kall1 = other.belk1*4 + other.zhir1*9 + other.ugl1*4;
-
-    }
-
-    public NutritionFact() {
     }
 
     String countBelk() {
