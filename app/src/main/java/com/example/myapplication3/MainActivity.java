@@ -13,9 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
 public class MainActivity extends AppCompatActivity {
 
     final Context context = this;
@@ -92,18 +89,15 @@ public class MainActivity extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog,int id) {
 
                                                 //ПЕРЕМЕННЫЕ БЖУК
-                                                final double  mass_double = Double.parseDouble(usermass.getText().toString());
-                                                final double  belk_double = Double.parseDouble(userbelk.getText().toString());
-                                                final double  zhir_double = Double.parseDouble(userzhir.getText().toString());
-                                                final double  ugl_double = Double.parseDouble(userugl.getText().toString());
-                                                final double  kall_double = mass_double*(belk_double*4 + zhir_double*9 + ugl_double*4)/100;
 
-                                                NumberFormat indicatorFormat = new DecimalFormat("#.#");//функция для отображения показателей без лишних нулей
+                                                NutritionFact myNutritionFact2 = new NutritionFact(usermass.getText(), userbelk.getText(), userzhir.getText(), userugl.getText());
 
-                                                tvBelkResult.setText(indicatorFormat.format(myNutritionFact.countBelk(belk_double*mass_double/100)));
-                                                tvZhirResult.setText(indicatorFormat.format(myNutritionFact.countZhir(zhir_double*mass_double/100)));
-                                                tvUglResult.setText(indicatorFormat.format(myNutritionFact.countUgl(ugl_double*mass_double/100)));
-                                                tvKallResult.setText(indicatorFormat.format(myNutritionFact.countKall(kall_double)));
+                                                NutritionFact myNutritionFact3 = new NutritionFact(myNutritionFact, usermass.getText(), userbelk.getText(), userzhir.getText(), userugl.getText());
+
+                                                tvBelkResult.setText(myNutritionFact.countBelk());
+                                                tvZhirResult.setText(myNutritionFact.countZhir());
+                                                tvUglResult.setText(myNutritionFact.countUgl());
+                                                tvKallResult.setText(myNutritionFact.countKall());
 
                                                 LayoutInflater li2 = getLayoutInflater();
 
@@ -117,11 +111,11 @@ public class MainActivity extends AppCompatActivity {
                                                 TextView tv_kkal_num = (TextView) it2.findViewById(R.id.tv_kkal_num);
 
                                                 tv_eat.setText(usereat.getText().toString());
-                                                tv_mass.setText(indicatorFormat.format(mass_double)+"г");
-                                                tv_belk_num.setText(indicatorFormat.format(belk_double*mass_double/100));
-                                                tv_zhir_num.setText(indicatorFormat.format(zhir_double*mass_double/100));
-                                                tv_ugl_num.setText(indicatorFormat.format(ugl_double*mass_double/100));
-                                                tv_kkal_num.setText(indicatorFormat.format(kall_double));
+                                                tv_mass.setText(myNutritionFact2.getMass());
+                                                tv_belk_num.setText(myNutritionFact2.getBelk());
+                                                tv_zhir_num.setText(myNutritionFact2.getZhir());
+                                                tv_ugl_num.setText(myNutritionFact2.getUgl());
+                                                tv_kkal_num.setText(myNutritionFact2.getCall());
 
                                                 l2.addView(it2);
 

@@ -1,25 +1,90 @@
 package com.example.myapplication3;
 
-public class NutritionFact {
+import android.text.Editable;
 
-    double belk;
-    double zhir;
-    double ugl;
-    double kall;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
-    public double countBelk(double belk) {
-        return this.belk = belk + this.belk;
+class NutritionFact {
+
+    double belk, zhir, ugl, mass, kall;
+
+    NumberFormat indicatorFormat = new DecimalFormat("#.#");//функция для отображения показателей без лишних нулей
+
+    public NutritionFact(Editable mass, Editable belk, Editable zhir, Editable ugl) {
+
+        this.mass = Double.parseDouble(mass.toString());
+        this.belk = Double.parseDouble(belk.toString());
+        this.zhir = Double.parseDouble(zhir.toString());
+        this.ugl = Double.parseDouble(ugl.toString());
+        this.kall = (this.mass*(this.belk*4 + this.zhir*9 + this.ugl*4))/100;
+
     }
 
-    public double countZhir(double zhir) {
-        return this.zhir = zhir + this.zhir;
+    public String getCall(){
+
+        return indicatorFormat.format((mass*(belk*4 + zhir*9 + ugl*4))/100);
     }
 
-    public double countUgl(double ugl) {
-        return this.ugl = ugl + this.ugl;
+    public String getMass(){
+
+        return indicatorFormat.format(mass) + "г";
+
     }
 
-    public double countKall(double kall) {
-        return this.kall = kall + this.kall;
+    public String getBelk(){
+
+        return indicatorFormat.format(belk*mass/100);
+
+    }
+
+    public String getZhir(){
+
+        return indicatorFormat.format(zhir*mass/100);
+
+    }
+
+    public String getUgl(){
+
+        return indicatorFormat.format(ugl*mass/100);
+    }
+
+    double belk1, zhir1, ugl1, kall1, mass1;
+
+    public NutritionFact(NutritionFact other, Editable mass, Editable belk, Editable zhir, Editable ugl) {
+
+        other.mass1 = (Double.parseDouble(mass.toString()));
+        other.belk1 = (Double.parseDouble(belk.toString()))*other.mass1/100;
+        other.zhir1 = (Double.parseDouble(zhir.toString()))*other.mass1/100;
+        other.ugl1 = (Double.parseDouble(ugl.toString()))*other.mass1/100;
+        other.kall1 = other.belk1*4 + other.zhir1*9 + other.ugl1*4;
+
+    }
+
+    public NutritionFact() {
+    }
+
+    String countBelk() {
+
+        return indicatorFormat.format(this.belk = this.belk1 + this.belk);
+
+    }
+
+    String countZhir() {
+
+        return indicatorFormat.format(this.zhir = this.zhir1 + this.zhir);
+
+    }
+
+    String countUgl() {
+
+        return indicatorFormat.format(this.ugl = this.ugl1 + this.ugl);
+
+    }
+
+    String countKall() {
+
+        return indicatorFormat.format(this.kall = this.kall1 + this.kall);
+
     }
 }
