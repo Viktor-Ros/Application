@@ -11,7 +11,7 @@ class NutritionFact {
 
     NumberFormat indicatorFormat = new DecimalFormat("#.#");//функция для отображения показателей без лишних нулей
 
-    public NutritionFact(NutritionFact other, Editable mass, Editable belk, Editable zhir, Editable ugl) {
+    NutritionFact(NutritionFact other, Editable mass, Editable belk, Editable zhir, Editable ugl) {
 
         this.mass = Double.parseDouble(mass.toString());
         this.belk = Double.parseDouble(belk.toString());
@@ -27,57 +27,57 @@ class NutritionFact {
 
     }
 
-    public NutritionFact() {
+    NutritionFact() {
 
     }
 
-    public String getCall(){
+    String getCall(){
 
         return indicatorFormat.format((mass*(belk*4 + zhir*9 + ugl*4))/100);
     }
 
-    public String getMass(){
+    String getMass(){
 
         return indicatorFormat.format(mass) + "г";
 
     }
 
-    public String getBelk(){
+    String getBelk(){
 
         return indicatorFormat.format(belk*mass/100);
 
     }
 
-    public String getZhir(){
+    String getZhir(){
 
         return indicatorFormat.format(zhir*mass/100);
 
     }
 
-    public String getUgl(){
+    String getUgl(){
 
         return indicatorFormat.format(ugl*mass/100);
     }
 
-    String countBelk() {
+    String getCountBelk() {
 
         return indicatorFormat.format(this.belk = this.belk1 + this.belk);
 
     }
 
-    String countZhir() {
+    String getCountZhir() {
 
         return indicatorFormat.format(this.zhir = this.zhir1 + this.zhir);
 
     }
 
-    String countUgl() {
+    String getCountUgl() {
 
         return indicatorFormat.format(this.ugl = this.ugl1 + this.ugl);
 
     }
 
-    String countKall() {
+    String getCountKall() {
 
         return indicatorFormat.format(this.kall = this.kall1 + this.kall);
 

@@ -92,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
 
                                                 NutritionFact myNutritionFact2 = new NutritionFact(myNutritionFact1, usermass.getText(), userbelk.getText(), userzhir.getText(), userugl.getText());
 
-                                                tvBelkResult.setText(myNutritionFact1.countBelk());
-                                                tvZhirResult.setText(myNutritionFact1.countZhir());
-                                                tvUglResult.setText(myNutritionFact1.countUgl());
-                                                tvKallResult.setText(myNutritionFact1.countKall());
+                                                tvBelkResult.setText(myNutritionFact1.getCountBelk());
+                                                tvZhirResult.setText(myNutritionFact1.getCountZhir());
+                                                tvUglResult.setText(myNutritionFact1.getCountUgl());
+                                                tvKallResult.setText(myNutritionFact1.getCountKall());
 
                                                 LayoutInflater li2 = getLayoutInflater();
 
