@@ -13,16 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     final Context context = this;
     private Button button;
     private LinearLayout linearLayout1;
     private LinearLayout linearLayout3;
-    private TextView tvBelkResult;
-    private TextView tvZhirResult;
-    private TextView tvUglResult;
-    private TextView tvKallResult;
+    private static TextView tvBelkResult;
+    private static TextView tvZhirResult;
+    private static TextView tvUglResult;
+    private static TextView tvKallResult;
     private int countID = 1;
 
 
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
                 LayoutInflater li1 = getLayoutInflater();
 
                 View it1 = li1.inflate(R.layout.product_layout1, linearLayout1, false);
@@ -88,14 +89,12 @@ public class MainActivity extends AppCompatActivity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog,int id) {
 
-                                                //ПЕРЕМЕННЫЕ БЖУК
-
                                                 NutritionFact myNutritionFact2 = new NutritionFact(myNutritionFact1, usermass.getText(), userbelk.getText(), userzhir.getText(), userugl.getText());
 
-                                                tvBelkResult.setText(myNutritionFact1.getCountBelk());
-                                                tvZhirResult.setText(myNutritionFact1.getCountZhir());
-                                                tvUglResult.setText(myNutritionFact1.getCountUgl());
-                                                tvKallResult.setText(myNutritionFact1.getCountKall());
+                                                tvBelkResult.setText(NutritionFact.getCountBelk());
+                                                tvZhirResult.setText(NutritionFact.getCountZhir());
+                                                tvUglResult.setText(NutritionFact.getCountUgl());
+                                                tvKallResult.setText(NutritionFact.getCountKall());
 
                                                 LayoutInflater li2 = getLayoutInflater();
 
@@ -145,7 +144,33 @@ public class MainActivity extends AppCompatActivity {
                                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
                 countID++;
+
+                SaveMyView.setList(it1);
             }
         });//тут кончается слушатель на первую кнопку
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+        ArrayList<View> list = SaveMyView.getList();
+
+        for (int i = 0; i < list.size(); i++) {
+
+            if (list.get(i).getParent() != null) {
+
+                ((ViewGroup) list.get(i).getParent()).removeView(list.get(i));
+
+            }
+            
+            linearLayout1.addView(list.get(i));
+        }
+
+        tvBelkResult.setText(NutritionFact.getCountBelk());
+        tvZhirResult.setText(NutritionFact.getCountZhir());
+        tvUglResult.setText(NutritionFact.getCountUgl());
+        tvKallResult.setText(NutritionFact.getCountKall());
     }
 }
