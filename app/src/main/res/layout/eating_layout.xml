@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eating_layout"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="#FFFFFF"
+    android:orientation="horizontal"
+    android:padding="1dp"
+    android:paddingStart="1dp"
+    android:paddingLeft="1dp"
+    android:paddingTop="1dp"
+    android:paddingEnd="1dp"
+    android:paddingRight="1dp"
+    android:paddingBottom="1dp">
+
+    <LinearLayout
+        android:id="@+id/buttonTime_Layout"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/eating_Button"
+            android:layout_width="49dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:padding="20dp"
+            android:paddingStart="14dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:text="Перекус №1"
+            android:textColor="#FFFBFB" />
+
+        <TextView
+            android:id="@+id/time_TextView"
+            android:layout_width="49dp"
+            android:layout_height="25dp"
+            android:background="#000000"
+            android:paddingStart="1dp"
+            android:paddingLeft="1dp"
+            android:paddingTop="1dp"
+            android:paddingEnd="1dp"
+            android:paddingRight="1dp"
+            android:paddingBottom="1dp"
+            android:text="12:30"
+            android:textAlignment="center"
+            android:textColor="#FAFAFA" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:orientation="vertical"></LinearLayout>
+
+</LinearLayout>

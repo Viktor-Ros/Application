@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/productAdd_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:text="Добавить продукт" />
+
+    <Button
+        android:id="@+id/productDel_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:text="Удалить трапезу" />
+
+    <Button
+        android:id="@+id/eatingRename_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Изменить название" />
+</LinearLayout>
